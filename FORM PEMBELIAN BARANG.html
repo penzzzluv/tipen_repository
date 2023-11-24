@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>FORM PEMBELIAN BARANG</title>
+</head>
+
+<body bgcolor="#B0C4DE" style="font-family: Baskerville, 'Palatino Linotype', Palatino, 'Century Schoolbook L', 'Times New Roman', serif">
+	<center>
+	<h1 style="font-family: Cambria, 'Hoefler Text', 'Liberation Serif', Times, 'Times New Roman', serif">I K E A N</h1>
+	<h3>"Toko Perabot <span style="font-family: Cambria, 'Hoefler Text', 'Liberation Serif', Times, 'Times New Roman', serif; font-size: x-large;">I K E A N</span> Selalu Ada, Berkualitas, Terpercaya, Terjangkau"</h3><br>
+	<h4>Check Pricelist Product</h4>
+	<form>
+	  <table width="526" height="261">
+		<tr>
+			<td width="196" height="50"><strong>Nama Barang</strong></td>
+			<td width="11">:</td>
+			<td width="237">
+			<select id="brg" name="barang" onChange="hargaBarang()">
+			<option value="pilih">Pilih Perabot Yang Anda Butuhkan</option>
+			<option value="meja">MEJA</option>
+			<option value="sofa">SOFA</option>
+			<option value="lemari">LEMARI PAKAIAN</option>
+		</select>
+		</tr>
+		<tr>
+			<td height="50"><strong>Harga Satuan</strong></td>
+			<td>:</td>
+			<td><p id="output_harga"></p></td>
+		</tr>
+		<tr>
+			<td height="50"><strong>Jumlah Barang</strong></td>
+			<td>:</td>
+			<td><input type="text" id="jumlah" onBlur="menghitungJumlah()"></td>
+		</tr>
+		<tr>
+			<td height="50"><strong>Total Harga</strong></td>
+			<td>:</td>
+			<td><p id="output_total"></p></td>
+		</tr>
+		<tr>
+			<td height="50"><strong>Masukkan Diskon (1-100)</strong></td>
+			<td>:</td>
+			<td><input type="text" id="diskon" onBlur="mydiskon()">%</td>
+		</tr>
+		<tr>
+			<td height="50"><strong>Total Bayar Dipotong Diskon</strong></td>
+			<td>:</td>
+			<td><p id="output_totaldiskon"></p></td>
+		</tr>
+		<tr>
+			<td colspan="3" style="text-align: center; color:#B0C4DE;">spasi</td>
+		</tr>
+		<tr>
+			<td colspan="3" style="text-align: center"><button id="rst" name="rst" readonly><strong>RESET CHECK PRICELIST</strong></button></td>
+		</tr>
+	  </table>
+	</form>
+	<br>
+	
+
+	<script type="text/javascript">
+		var hargameja, hargasofa, hargalemari;
+		var total;
+		function hargaBarang()
+		{
+			var brg = document.getElementById("brg").value;
+			var output = document.getElementById('output_harga');
+			if (brg=="meja"){
+				hargameja = 3550000;
+				output.innerHTML = 'Rp. 3.550.000';
+				}else if (brg=="sofa")
+						  {
+							  hargasofa = 5395000;
+							  output.innerHTML = 'Rp. 5.395.000';
+						  }else if (brg=="lemari")
+									{
+										hargalemari = 4999000;
+										output.innerHTML = 'Rp. 4.999.000';
+									}else
+										{
+											output.innerHTML="Silahkan Bisa Pilih Barang Dahulu";
+										}
+		}
+		function menghitungJumlah()
+			{
+				var jml = document.getElementById("jumlah").value;
+				var brg = document.getElementById("brg").value;
+				var output = document.getElementById("output_total");
+				jml *= 1;
+				if(brg=="meja")
+				   {
+					   total = (jml * hargameja);
+					   output.innerHTML = 'Rp.' + total;
+				   }else if(brg=="sofa")
+						   {
+						   		 total = (jml * hargasofa);
+					   			output.innerHTML = 'Rp.' + total;
+						   }else if(brg=="lemari"){
+									total = (jml * hargalemari);
+							   output.innerHTML = 'Rp.' + total;
+									}
+			}
+		function mydiskon()
+		{
+			var totalHargaDiskon, totalDiskon;
+			var diskon = document.getElementById("diskon").value;
+			var output = document.getElementById("output_totaldiskon");
+			diskon *= 1;
+			totalDiskon = (total / 100 * diskon);
+			totalHargaDiskon = (total - totalDiskon);
+			output.innerHTML = "Rp. " + totalHargaDiskon;
+			
+		}
+		
+	</script>
+</center>
+</body>
+</html>
